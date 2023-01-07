@@ -8,12 +8,12 @@
       <div class="turn-page">
         <p>←&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;→</p>
       </div>
-      <div id="contain" v-for="friend in friendList" :key="friend.id">
-        <div class="friend-box">
+      <div id="contain" >
+        <div class="friend-box" v-for="friend in friendList" :key="friend.id" :class="{showDetail:friend.id === hoverId}" @mouseenter="showDetail(friend.id)" @mouseleave="hideDetail(friend.id)">
           <div class="friend-no">
             {{friend.id}}
           </div>
-          <div class="friend-name">
+          <div class="friend-name" >
             {{friend.name}}
           </div>
           <div class="friend-detail">
@@ -32,6 +32,7 @@
     name: 'HomePage',
     data() {
       return {
+        hoverId: -1,
         friendList: [],
       }
     },
@@ -39,6 +40,15 @@
       this.queryAllFriend();
     },
     methods: {
+      createIdIndex (id) {
+        return "friend-box-" + id;
+      },
+      showDetail (id) {
+        this.hoverId = id;
+      },
+      hideDetail () {
+        this.hoverId = -1;
+      },
       queryAllFriend () {
         axios({
           method: "get",
@@ -116,8 +126,13 @@
   width: 130%;
   z-index: 999;
   left: 12px;
-  top: 5px;
+  padding-top: 5px;
   margin-right: 12px;
   display: none;
 }
+
+.showDetail .friend-detail {
+  display: block;
+}
+
 </style>
