@@ -17,7 +17,7 @@
             {{friend.name}}
           </div>
           <div class="friend-detail">
-            sdfdafsa<br>dsafdsa
+            <FriendDetail/>
           </div>
         </div>
       </div>
@@ -27,9 +27,11 @@
 
 <script>
   import axios from "@/plugin/axiosInstance";
+  import FriendDetail from "@/components/FriendDetail";
 
   export default {
     name: 'HomePage',
+    components: {FriendDetail},
     data() {
       return {
         hoverId: -1,
@@ -85,50 +87,51 @@
   line-height: 50px;
 }
 
+.friend-box {;
+  width: 23%;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-top:22px;
+  height: 44px;
+  float: left;
+  border-radius: 22px;
+  background: rgb(78,49,34);
+  box-shadow: 1px 2px 1px 1px rgba(78,49,34, 0.5);
+}
+
 .friend-no {
   width: 30px;
   float: left;
   border-radius: 15px;
-  background: red;
+  background: rgb(148, 102, 82);
   height: 30px;
-  margin-top: 5px;
-  margin-left: 5px;
+  margin-top: 7px;
+  margin-left: 7px;
   line-height: 30px;
   text-align: center;
   font-size: 12px;
   color: white;
 }
 
-.friend-box {;
-  width: 23%;
-  margin-left: 1%;
-  margin-right: 1%;
-  margin-top:15px;
-  height: 40px;
-  float: left;
-  border-radius: 20px;
-  background: rgba(0, 208, 255, 0.99);
-  box-shadow: 2px 2px 3px 3px rgb(7, 115, 115);
-}
-
 .friend-name {
   font-size: 20px;
-  font-weight: bolder;
-  line-height: 38px;
-  padding-left: 44px;
+  font-weight: bold;
+  line-height: 42px;
+  padding-left: 48px;
   color: white;
 }
 
 .friend-detail {
   position: relative;
-  background: greenyellow;
-  height: 250px;
-  width: 130%;
   z-index: 999;
   left: 12px;
   padding-top: 5px;
   margin-right: 12px;
   display: none;
+}
+
+.showDetail {
+  background: rgb(203,167,148);
 }
 
 .showDetail .friend-detail {
