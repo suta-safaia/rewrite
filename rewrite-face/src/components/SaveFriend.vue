@@ -9,19 +9,17 @@
           234
         </div>
         <div class="save-friend-form-name">
-          <input placeholder="告诉我的ta的名字吧"/>
+          <input v-model="friend.name"  placeholder="告诉我的ta的名字吧"/>
         </div>
         <div style="clear:both;"></div>
         <div class="save-friend-form-content">
-          <div class="save-friend-form-content-text" contenteditable="true">
-
-          </div>
+          <div class="save-friend-form-content-text" contenteditable="true"/>
         </div>
       </div>
       <div class="save-friend-bottom">
         <div class="save-friend-bottom-operation">
-          <button>保存</button>
-          <button>取消</button>
+          <button @click="SaveFriend">保存</button>
+          <button @click="closeSaveFriend">取消</button>
         </div>
       </div>
     </div>
@@ -30,11 +28,13 @@
 
 <script>
 
+import axios from "@/plugin/axiosInstance";
 
 export default {
   name: 'SaveFriend',
   data() {
     return {
+      friend: {},
     }
   },
   props: {
@@ -44,7 +44,20 @@ export default {
 
   },
   methods: {
-
+    closeSaveFriend() {
+      this.friend = {}
+      document.getElementsByClassName("save-friend-form-content-text")[0].innerText = null
+      this.$parent.closeSaveFriend();
+    },
+    SaveFriend() {
+      this.friend.content = document.getElementsByClassName("save-friend-form-content-text")[0].innerText;
+      axios({
+        method: "post",
+        url: "/saveFriendById",
+        data: this.friend
+      })
+      this.closeSaveFriend()
+    }
   }
 }
 

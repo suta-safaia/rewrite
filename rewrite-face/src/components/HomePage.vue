@@ -2,14 +2,14 @@
   <div id="outer">
     <!---->
     <div>
-      <p style="float:right"> Memory</p>
+      <button style="float:right" @click="openSaveFriend">生命数据录入</button>
     </div>
     <div>
       <div class="turn-page">
         <p>←&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;→</p>
       </div>
       <div id="contain" >
-        <div class="friend-box" v-for="friend in friendList" :key="friend.id" :class="{showDetail:friend.id === hoverId}" @mouseenter="showDetail(friend.id)" @mouseleave="hideDetail(friend.id)">
+        <div class="friend-box" v-for="friend in friendList" :key="friend.id" :class="{'display-div':friend.id === hoverId}" @mouseenter="showDetail(friend.id)" @mouseleave="hideDetail(friend.id)">
           <div class="friend-no">
             {{friend.id}}
           </div>
@@ -23,10 +23,10 @@
       </div>
     </div>
   </div>
-  <div class="cover">
+  <div class="cover" :class="{'hidden-div':showCover === 0}">
 
   </div>
-  <SaveFriend></SaveFriend>
+  <SaveFriend :class="{'hidden-div':showSaveFriend === 0}"></SaveFriend>
 </template>
 
 <script>
@@ -40,6 +40,8 @@
     data() {
       return {
         hoverId: -1,
+        showCover: 0,
+        showSaveFriend: 0,
         friendList: [],
       }
     },
@@ -63,7 +65,16 @@
         }).then(res => {
           this.friendList = res.data.friendPerInfoList;
         })
-      }
+      },
+      openSaveFriend() {
+        this.showCover = 1;
+        this.showSaveFriend = 1;
+      },
+      closeSaveFriend() {
+        this.showCover = 0;
+        this.showSaveFriend = 0;
+        this.queryAllFriend();
+      },
     }
   }
 
@@ -135,11 +146,19 @@
   display: none;
 }
 
-.showDetail {
+.display-div.friend-box {
   background: rgb(203,167,148);
 }
 
-.showDetail .friend-detail {
+.display-div {
+  display: block;
+}
+
+.hidden-div {
+  display: none;
+}
+
+.display-div .friend-detail {
   display: block;
 }
 
@@ -150,6 +169,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  display: none;
 }
 
 .popup {

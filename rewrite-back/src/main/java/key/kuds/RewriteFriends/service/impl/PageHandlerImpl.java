@@ -25,6 +25,15 @@ public class PageHandlerImpl implements PageHandler {
     public PageInfo getPageInfo(PagePerInfoQuery pagePerInfoQuery) {
         //因为数据量太少 不选择使用分页
         List<FriendPerInfo> friendPerInfoList = dataHandler.getPagePerInfo();
+        //编号修改统一三位数
+        for (FriendPerInfo friendPerInfo: friendPerInfoList) {
+            if (friendPerInfo.getId().length() == 1) {
+                friendPerInfo.setId("00"+friendPerInfo.getId());
+            }
+            if (friendPerInfo.getId().length() == 2) {
+                friendPerInfo.setId("0"+friendPerInfo.getId());
+            }
+        }
         PageInfo pageInfo = new PageInfo();
         pageInfo.setFriendPerInfoList(friendPerInfoList);
         return pageInfo;
