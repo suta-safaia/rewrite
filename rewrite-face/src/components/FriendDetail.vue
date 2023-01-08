@@ -2,20 +2,21 @@
   <div class="friend-detail-box">
     <div class="friend-detail-title">
       <div class="friend-detail-title-number">
-        076
+        {{friend.id}}
       </div>
       <div class="friend-detail-title-name">
-        吃干冰的人
+        {{friend.name}}
+      </div>
+      <div class="friend-detail-title-operation">
+        编辑
       </div>
     </div>
-    <div class="friend-detail-text"> 二年级男生。高能力者。 </div>
-    <div class="friend-detail-text"> 能力名：高速吃干冰 </div>
+    <div class="friend-detail-text">{{friend.content}}</div>
+    <div class="friend-detail-text">  </div>
   </div>
 </template>
 
 <script>
-
-//import axios from "@/plugin/axiosInstance";
 
 export default {
   name: 'FriendDetail',
@@ -24,6 +25,9 @@ export default {
       hoverId: -1,
       friendList: [],
     }
+  },
+  props: {
+    friend: {}
   },
   mounted () {
 
@@ -45,7 +49,6 @@ export default {
 }
 
 .friend-detail-title {
-  width: 800px;
   height: 55px;
   padding-top: 15px;
   font-size: 30px;
@@ -68,6 +71,11 @@ export default {
   font-weight: bold;
 }
 
+.friend-detail-title-operation {
+  float: right;
+  margin-right: 30px;
+}
+
 .friend-detail-text {
   margin-left: 10px;
   height: 26px;
@@ -79,4 +87,4 @@ export default {
   font-weight: bold;
 }
 
-<img src="../assets/logo.png" height="200" width="200"/></style>
+</style>

@@ -17,21 +17,26 @@
             {{friend.name}}
           </div>
           <div class="friend-detail">
-            <FriendDetail/>
+            <FriendDetail :friend="friend"/>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="cover">
+
+  </div>
+  <SaveFriend></SaveFriend>
 </template>
 
 <script>
   import axios from "@/plugin/axiosInstance";
   import FriendDetail from "@/components/FriendDetail";
+  import SaveFriend from "@/components/SaveFriend";
 
   export default {
     name: 'HomePage',
-    components: {FriendDetail},
+    components: {SaveFriend, FriendDetail},
     data() {
       return {
         hoverId: -1,
@@ -69,7 +74,7 @@
 #outer {
   background-image: url(~@/staticData/87583161_p0.png);
   background-size: 100% 100%;
-  height: 1234px;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -136,6 +141,26 @@
 
 .showDetail .friend-detail {
   display: block;
+}
+
+.cover {
+  background: rgba(0,0,0,0.8);
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.popup {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 </style>
