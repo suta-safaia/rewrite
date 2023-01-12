@@ -7,7 +7,7 @@
       <div class="friend-detail-title-name">
         {{friend.name}}
       </div>
-      <div class="friend-detail-title-operation">
+      <div class="friend-detail-title-operation" @click="modifyFriend">
         编辑
       </div>
     </div>
@@ -33,7 +33,9 @@ export default {
 
   },
   methods: {
-
+    modifyFriend() {
+      this.$parent.openSaveFriend(this.friend);
+    }
   }
 }
 

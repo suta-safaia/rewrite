@@ -6,7 +6,7 @@
       </div>
       <div class="save-friend-form">
         <div class="save-friend-form-no">
-          234
+          {{this.friend.id}}
         </div>
         <div class="save-friend-form-name">
           <input v-model="friend.name"  placeholder="告诉我的ta的名字吧"/>
@@ -38,15 +38,14 @@ export default {
     }
   },
   props: {
-
+    modifySaveFriend: {},
   },
   mounted () {
-
+    this.friend = this.modifySaveFriend;
+    document.getElementsByClassName("save-friend-form-content-text")[0].innerText = this.friend.content;
   },
   methods: {
     closeSaveFriend() {
-      this.friend = {}
-      document.getElementsByClassName("save-friend-form-content-text")[0].innerText = null
       this.$parent.closeSaveFriend();
     },
     SaveFriend() {
@@ -55,8 +54,9 @@ export default {
         method: "post",
         url: "/saveFriendById",
         data: this.friend
+      }).then(() => {
+        this.closeSaveFriend()
       })
-      this.closeSaveFriend()
     }
   }
 }

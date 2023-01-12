@@ -17,7 +17,7 @@
             {{friend.name}}
           </div>
           <div class="friend-detail">
-            <FriendDetail :friend="friend"/>
+            <FriendDetail :friend="friend" v-if="hoverId !== -1"/>
           </div>
         </div>
       </div>
@@ -26,14 +26,13 @@
   <div class="cover" :class="{'hidden-div':showCover === 0}">
 
   </div>
-  <SaveFriend :class="{'hidden-div':showSaveFriend === 0}"></SaveFriend>
+  <SaveFriend v-if="showSaveFriend === 1" :modifySaveFriend="modifySaveFriend"></SaveFriend>
 </template>
 
 <script>
   import axios from "@/plugin/axiosInstance";
   import FriendDetail from "@/components/FriendDetail";
   import SaveFriend from "@/components/SaveFriend";
-
   export default {
     name: 'HomePage',
     components: {SaveFriend, FriendDetail},
@@ -43,6 +42,7 @@
         showCover: 0,
         showSaveFriend: 0,
         friendList: [],
+        modifySaveFriend: {},
       }
     },
     mounted () {
@@ -66,9 +66,11 @@
           this.friendList = res.data.friendPerInfoList;
         })
       },
-      openSaveFriend() {
+      openSaveFriend(friend) {
+        this.hoverId = -1;
         this.showCover = 1;
         this.showSaveFriend = 1;
+        this.modifySaveFriend = friend;
       },
       closeSaveFriend() {
         this.showCover = 0;

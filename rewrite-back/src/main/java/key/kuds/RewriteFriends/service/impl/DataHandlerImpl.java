@@ -77,6 +77,10 @@ public class DataHandlerImpl implements DataHandler {
         if(friendInfo == null) {
             return null;
         } else {
+            //todo
+            friendInfo.setId(""+Integer.parseInt(friendInfo.getId()));
+
+
             //修改概览主文件
             List<FriendPerInfo> friendPerInfoList = getPagePerInfo();
             if (friendInfo.getId() == null)  {
