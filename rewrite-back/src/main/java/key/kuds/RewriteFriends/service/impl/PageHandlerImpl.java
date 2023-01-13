@@ -8,7 +8,9 @@ import key.kuds.RewriteFriends.service.PageHandler;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 首页信息处理服务实现
@@ -25,15 +27,8 @@ public class PageHandlerImpl implements PageHandler {
     public PageInfo getPageInfo(PagePerInfoQuery pagePerInfoQuery) {
         //因为数据量太少 不选择使用分页
         List<FriendPerInfo> friendPerInfoList = dataHandler.getPagePerInfo();
-        //编号修改统一三位数
-        for (FriendPerInfo friendPerInfo: friendPerInfoList) {
-            if (friendPerInfo.getId().length() == 1) {
-                friendPerInfo.setId("00"+friendPerInfo.getId());
-            }
-            if (friendPerInfo.getId().length() == 2) {
-                friendPerInfo.setId("0"+friendPerInfo.getId());
-            }
-        }
+        //按照sno排序
+        friendPerInfoList = friendPerInfoList.stream().sorted(Comparator.comparing(FriendPerInfo::getId)).collect(Collectors.toList());
         PageInfo pageInfo = new PageInfo();
         pageInfo.setFriendPerInfoList(friendPerInfoList);
         return pageInfo;

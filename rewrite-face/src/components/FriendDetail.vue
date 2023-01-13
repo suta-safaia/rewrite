@@ -2,7 +2,7 @@
   <div class="friend-detail-box">
     <div class="friend-detail-title">
       <div class="friend-detail-title-number">
-        {{friend.id}}
+        {{friend.sno}}
       </div>
       <div class="friend-detail-title-name">
         {{friend.name}}

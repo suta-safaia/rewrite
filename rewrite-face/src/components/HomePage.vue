@@ -11,7 +11,7 @@
       <div id="contain" >
         <div class="friend-box" v-for="friend in friendList" :key="friend.id" :class="{'display-div':friend.id === hoverId}" @mouseenter="showDetail(friend.id)" @mouseleave="hideDetail(friend.id)">
           <div class="friend-no">
-            {{friend.id}}
+            {{friend.sno}}
           </div>
           <div class="friend-name" >
             {{friend.name}}
